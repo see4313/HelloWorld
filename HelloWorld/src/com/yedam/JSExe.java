@@ -11,7 +11,7 @@ public class JSExe {
 
 
 		//성수동 픽사를 보러갈까요 ? 말까요 ? 상당히 고민이 되네요...
-		// 임의의 수를 생성해주는 mathrandom.
+		// 임의의 수를 생성해주는 mathrandom. 
 		// 1~100 사시의 임의의 값 생성.
 		int sum = 0;
 		for (int i = 1; i <= 5; i++) {
