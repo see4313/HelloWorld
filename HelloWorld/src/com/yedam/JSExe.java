@@ -34,7 +34,7 @@ public class JSExe {
 	public static void test4() {
 
 		Scanner scn = new Scanner(System.in);
-		String str = "친구목록은 ";
+		String str = "";
 		while (true) {
 			System.out.println("친구이름 입력. 종료하려면 quit>");
 			String msg = scn.nextLine();
@@ -44,11 +44,17 @@ public class JSExe {
 				str += " 입니다";  // += 의미는 누적하겠다
 				break;
 			}
+			else if(str.equals("")) {
+				str+=msg;
+			}
+			else {
+				str += ", " + msg;
+			}
 //			System.out.println("친구 목록은 " + msg);
-			str += msg + ", ";
+//			str +=  msg + (", ") ;
 		}
 		// 홍길동, 김민규, 최석영 입력 => 친구 목록은 홍,김,최 입니다. 출력되게 입력 
-		System.out.println(str);
+		System.out.println("친구목록은" + str);
 		System.out.println("end of prog.");
 	} // end of test4
 
