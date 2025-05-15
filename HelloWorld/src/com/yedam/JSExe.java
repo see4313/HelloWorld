@@ -28,8 +28,28 @@ public class JSExe {
 		// test();
 		// test2();
 		// test3(); // 평균을 구하기(소수점까지 출력
-		 test4();
+//		 test4();
+		 test5();
 	}// and of main
+	
+	
+	
+	
+	public static void test5() {
+		//printf("형식문자열", 값1, 값2...)\
+		System.out.printf("%s %d\n", "문자", 30); // \n 은 줄바꿈
+		System.out.println("문자");
+		
+		//"홍길동", 100, 23.9 을 출력
+		System.out.printf("%s %d %.1f", "홍길동", 100, 23.9);  //%.1에서 뒤의 숫자는 소숫점 뒤의 자리수를 의미한다(두자지를 원하면 %.2f)
+		// %s "문자열", %d 정수, %.nf 실수 
+		// \n 줄바꿈
+		
+		//안녕하세요. 이름은 손이영입니다.
+		//나이는 28세입니다.
+		//몸무게는 50.4입니다.
+		System.out.printf(" \n 안녕하세요. 이름은 %s 입니다 \n 나이는 %d 세입니다 \n몸무게는 %.1f 입니다 ", "손이영", 28, 50.4 );
+	}
 
 	public static void test4() {
 
@@ -49,7 +69,7 @@ public class JSExe {
 			}
 			else {
 				str += ", " + msg;
-			}
+			}//친구 목록에서 맨 뒤의 ,는 없애기위해 조건문 추가
 //			System.out.println("친구 목록은 " + msg);
 //			str +=  msg + (", ") ;
 		}
@@ -104,5 +124,7 @@ public class JSExe {
 			}
 		}
 //		System.out.println("결과: " + sum);
-	}
+	}  //end of test1
+	
+
 } // end of class
