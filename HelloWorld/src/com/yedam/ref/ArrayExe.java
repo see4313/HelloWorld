@@ -23,58 +23,65 @@ public class ArrayExe {
 			case 1: // 추가.
 				System.out.println("이름을 입력하세요>>");
 				String name = scn.nextLine();
-				
+
 				// 배열에 추가.
 				for (int i = 0; i < friendApp.length; i++) {
 					if (friendApp[i] == null) {
 						friendApp[i] = name;
-						
-						// 동일한 이름이 있는지 확인하고 "추가하시겠습니까?" 확인 후 추가(1), 취소(2)
-						if(name==friendApp[i]) {
-							System.out.println("추가하시겠습니까?");
-						} else if(friendApp[i] == null ) {
-							System.out.println("추가(1), 취소(2)");
-						}
+						break;
+
 					}
-					break;
-					
-					}break; //case에 대해서도 break해줘야 한번만이름입력하라고 뜸
-				
+					// 동일한 이름이 있는지 확인하고 "추가하시겠습니까?" 확인 후 추가(1), 취소(2)
+					else {
+						if(friendApp[i].equals(name)) {
+							System.out.println("추가하시겠습니까?추가(1), 취소(2)");
+							int name1 =Integer.parseInt(scn.nextLine());
+							if (name1 == 2) {
+								break;
+							}							
+						}
+					} 
+
+				}
+				break; // case에 대해서도 break해줘야 한번만이름입력하라고 뜸
+
 			case 2: // 목록
 
 				for (int i = 0; i < friendApp.length; i++) {
 					if (friendApp[i] != null) {
 						System.out.printf("이름: %s\n", friendApp[i]);
 					}
-				}break;
-				
+				}
+				break;
+
 			case 3: // 삭제
-				
+
 				System.out.println("이름을 입력하세요>>");
 				String name1 = scn.nextLine();
-				
-				
+
+				boolean del = false; // 친구가 없는걸 false
 				for (int i = 0; i < friendApp.length; i++) {
 					if (friendApp[i] != null && friendApp[i].equals(name1)) {
 						friendApp[i] = null; // 삭제
+						del = true; // 친구가 있다는 표시 
+						break; 
 					}
-					//삭제시 찾는 이름이 없을 경우 "찾는이름이 없습니다"
-					else if(name1 != null) {
-						System.out.println("찾는 이름이 없습니다");
-						break;
-					}
+					// 삭제시 찾는 이름이 없을 경우 "찾는이름이 없습니다"
 					
-				} break;
-				
+				} //end of for
+				if (!del) {
+					System.out.println("찾는 이름이 없습니다.");
+					break;
+				}
+				break;
+
 			case 4: // 종료
-			run = false;
-			System.out.println("종료");
-				
-				
-			
-		}// end of switch
+				run = false;
+				System.out.println("종료");
+
+			}// end of switch
 		} // end of while
-	System.out.println("end of prog");
+		System.out.println("end of prog");
 
 	} // end of friendApp
 

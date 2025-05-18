@@ -97,7 +97,7 @@ public class JSExe {
 
 	public static void test2() {
 
-		// 임의의 수를 생성해주는 mathrandom.
+		// 임의의 수를 생성해주는 math.random
 
 		// 30~100 사이의 임의의 값 생성.
 		// 평균: 173/5 => 34.6
