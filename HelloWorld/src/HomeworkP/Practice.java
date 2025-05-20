@@ -102,35 +102,47 @@ public class Practice {
 
 	} // end of name3.
 
+	
 	// case
 	// - 배열 크기가 3으로 선언 =>
 	public static void name4() {
 		Scanner scn = new Scanner(System.in);
 		boolean run = true;
 
-		int[] num1 = new int[3]; // = 크기가 3인 배열 선언
+		int sum = Integer.parseInt(scn.nextLine()); 
+		String[] num1 = new String[sum]; // = 크기가 3인 배열 선언
+		
+		
 		while (run) {
 			System.out.println("번호를 입력하세요 1,2,3,4");
 			int num = Integer.parseInt(scn.nextLine());
 			
 			switch (num) {
-		
-			
-			
+
 			case 1: // 입력
 				for (int i = 0; i < num1.length; i++) {
 					System.out.println("입력값 >>");
-					num1[i] = Integer.parseInt(scn.nextLine());
+					num1[i] = scn.nextLine();
 				}
 				
 				break;
 			case 2: //삭제
-				System.out.println("2번입니다");
+				System.out.println("삭제 할 숫자를 입력하세요");
+				String minu = scn.nextLine();
+				for (int i = 0; i < num1.length; i++) {
+					if(minu.equals(num1[i])) {
+						num1[i] = null;
+						System.out.println("삭제완");
+					}
+				}
 				break;
 				
 			case 3: // 조회
 				for (int i = 0; i < num1.length; i++) {
-					System.out.println(num1[i]);
+					if(num1[i] != null) {
+						
+						System.out.println(num1[i]);
+					}
 					
 				}
 				
