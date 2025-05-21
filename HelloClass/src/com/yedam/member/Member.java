@@ -16,7 +16,7 @@ public Member(String memberId, String memberName, String phone, int point) {
 	this.memberName = memberName;
 	this.phone = phone;
 	this.point = point;
-}
+} 
 
 // 메소드(getter, setter) => 우클릭 source => getters and setters클릭해서 원하는거 체크하고 만들기
 public String getMemberId() {

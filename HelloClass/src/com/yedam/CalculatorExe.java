@@ -16,7 +16,7 @@ public class CalculatorExe {
 		
 		double sum = cal.add(num1, 10.5);
 		
-		//메소드 추가
+		//메소드 추가 
 		int[] numAry = {10, 20, 30};
 		sum = cal.add(numAry);
 		
