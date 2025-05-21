@@ -5,9 +5,9 @@ public class PhoneExe {
 		
 		
 		// 부모 클래스
-		Cellphone phone1 = new Cellphone();
-		phone1.model = "IT203";
-		phone1.color = "red";
+		Cellphone phone1 = new Cellphone("It203", "red");
+//		phone1.model = "IT203";
+//		phone1.color = "red";
 		phone1.powerOn();
 		phone1.powerOff();
 		System.out.println(phone1.toString());

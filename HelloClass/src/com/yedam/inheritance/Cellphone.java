@@ -13,9 +13,9 @@ public class Cellphone extends Object { // object가 부모보다 상위메소�
 	String color;
 	
 	// 생성자
-	public Cellphone() {}  //기본생성자
+	public Cellphone() {}  //기본생성자 => (()매개변수 없이 쓰겠다)
 	public Cellphone (String model, String color) {
-		this.model = model;
+		this.model = model;  //this를 붙이는 이유는 클래스안에 있는거라는의미
 		this.color = color;
 	}
 	

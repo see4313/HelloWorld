@@ -44,29 +44,44 @@ public class BoardExe {
 //		boolean run = UserExe.login(null, null);
 		// run = true 면 userEXe에 있는 uname, passwd 값을 사용자가 입력한값으로 출력의미
 		// 사용자가 값을 입력해야기때문에 null,null 로 자리값만 마련해줌
-		boolean run = true;
 
-		for (int i = 0; i < 3; i++) {
-			
-			String id = userMessage("아이디를 입력");
-			String pw = userMessage("비밀번호를 입력");
-			if (!UserExe.login(id, pw)) { // = !true = false(맞게 입력했을때)
-				if (i == 2) {
-					System.out.println("3번 틀렸습니다");
-					return;
-				}
-				System.out.println("아이디와 비밀번호를 확인하세요");
-			} else {
-				System.out.println("환영합니다");
-				break;
-			}
-		} // end of for
+//		for (int i = 0; i < 3; i++) {
+//			
+//			String id = userMessage("아이디를 입력");
+//			String pw = userMessage("비밀번호를 입력");
+//			if (!UserExe.login(id, pw)) { // = !true = false(맞게 입력했을때)
+//				if (i == 2) {
+//					System.out.println("3번 틀렸습니다");
+//					return;
+//				}
+//				System.out.println("아이디와 비밀번호를 확인하세요");
+//			} else {
+//				System.out.println("환영합니다");
+//				break;
+//			}
+//		} // end of for
 
 		// while
-		
+		int count = 0;
+		while(true) {
+			String id = userMessage("아이디를 입력");
+			String pw = userMessage("비밀번호를 입력");
+			if(!UserExe.login(id,pw)) {
+				count++;
+				if (count == 3) {
+					System.out.println("3번 실패!!!");
+					return;
+				}
+				System.out.println("다른값을 입력하세요");
+			} else {
+				System.out.println("로그인 성공!");
+				break;
+			}
+		}
 		
 		// 로그인 성공하면 while 문 실행
 
+		boolean run = true;
 		while (run) {
 			System.out.println("----------------------------------------------");
 			System.out.println(" 1. 추가  2. 수정  3. 삭제  4.목록  5. 달력   6. 종료");
@@ -83,6 +98,7 @@ public class BoardExe {
 				break;
 			case 3: // 삭제
 				removeBoard();
+				sort();
 				break;
 			case 4: // 목록
 				boardList();
@@ -256,7 +272,7 @@ public class BoardExe {
 		return max + 1; // 글번호를 입력받은값에서 +1씩해서 작은순으로 정렬해주겠담
 	} // end of nextSquence.
 
-	void sort() { // 목록을 역순으로 절이해주는 코드
+	void sort() { // 중간에 삭제하는 값이 있을때 한칸씩 앞당겨 빈칸을 채워주게 해주는코드
 		Board temp = null;
 		for (int j = 0; j < boards.length - 1; j++) {
 			for (int i = 0; i < boards.length - 1; i++) {
