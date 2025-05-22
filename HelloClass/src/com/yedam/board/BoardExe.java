@@ -36,50 +36,62 @@ public class BoardExe {
 		boards[9] = new Board(19, "자바가 힘들어요8.", "자바는 힘들지 않아요", "십동이");
 	} // end of boardExe
 
-	// 메소드.
-	void execute() {
-		// 3번 기회 숙제. 2025
-		// 아이디입력.
-		// 비밀번호 입력.
-//		boolean run = UserExe.login(null, null);
-		// run = true 면 userEXe에 있는 uname, passwd 값을 사용자가 입력한값으로 출력의미
-		// 사용자가 값을 입력해야기때문에 null,null 로 자리값만 마련해줌
+	// loginCheck
+	// 3번 기회 숙제. 2025
+	// 아이디입력.
+	// 비밀번호 입력.
 
-//		for (int i = 0; i < 3; i++) {
-//			
-//			String id = userMessage("아이디를 입력");
-//			String pw = userMessage("비밀번호를 입력");
-//			if (!UserExe.login(id, pw)) { // = !true = false(맞게 입력했을때)
-//				if (i == 2) {
-//					System.out.println("3번 틀렸습니다");
-//					return;
-//				}
-//				System.out.println("아이디와 비밀번호를 확인하세요");
-//			} else {
-//				System.out.println("환영합니다");
-//				break;
-//			}
-//		} // end of for
-
+	boolean loginCheck() {
 		// while
 		int count = 0;
-		while(true) {
+		while (true) {
 			String id = userMessage("아이디를 입력");
 			String pw = userMessage("비밀번호를 입력");
-			if(!UserExe.login(id,pw)) {
+			// 로그인 성공하면...
+			if (!UserExe.login(id, pw)) {  //(!UserExe.login(id, pw)) =!ture => false의 의미
 				count++;
 				if (count == 3) {
-					System.out.println("3번 실패!!!");
-					return;
+					System.out.println("3번 실패!!!"); 
+//					return false; // 로그인을 3번실패하면 반복문 종료
 				}
-				System.out.println("다른값을 입력하세요");
+				System.out.println("아이디와 비밀번호를 확인하세요");
 			} else {
 				System.out.println("로그인 성공!");
-				break;
+				return true;  //true일때 다음으로 넘어감
 			}
-		}
+		} // 로그인을 해볼 3번의 기회를 제공
 		
-		// 로그인 성공하면 while 문 실행
+	}// end of loginCheck
+
+//	boolean run = UserExe.login(null, null);
+	// run = true 면 userEXe에 있는 uname, passwd 값을 사용자가 입력한값으로 출력의미
+	// 사용자가 값을 입력해야기때문에 null,null 로 자리값만 마련해줌
+
+//	for (int i = 0; i < 3; i++) {
+//		
+//		String id = userMessage("아이디를 입력");
+//		String pw = userMessage("비밀번호를 입력");
+//		if (!UserExe.login(id, pw)) { // = !true = false(맞게 입력했을때)
+//			if (i == 2) {
+//				System.out.println("3번 틀렸습니다");
+//				return;
+//			}
+//			System.out.println("아이디와 비밀번호를 확인하세요");
+//		} else {
+//			System.out.println("환영합니다");
+//			break;
+//		}
+//	} // end of for
+
+	// 로그인 성공하면 while 문 실행
+
+	// 메소드.
+
+	void execute() {
+		if (!loginCheck()) { // 위에 로그인(!login~는 flase)에서 3번 실패했을 경우에는 의미 (!loginCheck) = true 로그인 성공의미
+			return; // excute 메소드를 종료의미
+		}
+		System.out.println("@환영합니다@");
 
 		boolean run = true;
 		while (run) {
@@ -87,7 +99,16 @@ public class BoardExe {
 			System.out.println(" 1. 추가  2. 수정  3. 삭제  4.목록  5. 달력   6. 종료");
 			System.out.println("----------------------------------------------");
 			System.out.print("선택>> ");
-			int selectNo = Integer.parseInt(scn.nextLine());
+
+			// 문자를 숫자로 변경할 떄 예외발생
+			int selectNo = 0; // 선언하는 부분은 밖에
+			try {
+				selectNo = Integer.parseInt(scn.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("1 ~ 5번중에 선택");
+				continue; // 다시 실생 안하고 다시 반복문의 시작으로 돌아감
+			}
+
 			switch (selectNo) {
 			case 1: // 추가
 				addBoard();
@@ -185,8 +206,13 @@ public class BoardExe {
 			} else if (str.equals("p")) { // 페이지를 한장씩 뺌
 				page--;
 			} else {
-				int no = Integer.parseInt(str); // no = 글번호
-
+				
+				int no = 0;
+				try{no = Integer.parseInt(str); // no = 글번호
+				}catch (NumberFormatException e) {
+					System.out.println("목록에 있는 글번호를 선택하세요");
+					continue; // 다시 목록부터 보여주기
+				}
 				// 배열에서 조회
 				Board sboard = getBoard(no); // 반환되는 데이터타입이 board타입
 				if (sboard == null) {

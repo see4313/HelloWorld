@@ -3,13 +3,34 @@ package com.yedam;
 import java.util.Scanner;
 
 public class Calendar {
+
+	static boolean isLeapYear(int year) {
+		// 윤년이면 true, 평년이면 false.
+
+		if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+			return true;
+		} else {
+		}
+		return false;
+
+	}// end of isLeapYear
+
+//	boolean leapYear = true;
+//	//윤년이면 true, 평년이면 false
+//	boolean leapYear = true;
+//	if(year % 4 != 0) {
+//		leapYear = false;
+//	}
+//	if(leapYear && year ) {
+//		
+//	}
 	Scanner scn = new Scanner(System.in);
-	
-	public static void showMonth() { 
-		//Sun Mon Tue Wen Thu Fri Sat
-		//===================================
-		//                 1    2   3
-		// 4   5   6   7   8    9   10
+
+	public static void showMonth() {
+		// Sun Mon Tue Wen Thu Fri Sat
+		// ===================================
+		// 1 2 3
+		// 4 5 6 7 8 9 10
 //		System.out.println(" Sun  Mon  Tue  Wen  Thu  Fri  Sat ");
 //		System.out.println(" =====================================");
 //		System.out.println("  1    2    3    4    5    6    7");
@@ -17,14 +38,14 @@ public class Calendar {
 //		System.out.println("  15   16   17   18   19  20    21");
 //		System.out.println("  22   23   24   25   26  27    28");
 //		System.out.println("  29   30");
-		
+
 		int mon = 5;
 		System.out.printf("%d", mon);
 		System.out.println(" Sun  Mon  Tue  Wen  Thu  Fri  Sat ");
 		System.out.println(" =====================================");
 		int space = 4;
 		int lastDate = 31;
-		
+
 		for (int i = 0; i < space; i++) {
 			System.out.printf("%4s", " ");
 		}
@@ -34,5 +55,5 @@ public class Calendar {
 				System.out.println();
 			}
 		}
-	} // 
-}//end of class
+	} //
+}// end of class

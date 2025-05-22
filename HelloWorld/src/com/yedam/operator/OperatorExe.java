@@ -2,7 +2,7 @@ package com.yedam.operator;
 
 public class OperatorExe {
 	public static void main(String[] args) {
-		test5();
+		test4();
 		
 	}
 
@@ -111,6 +111,8 @@ public class OperatorExe {
 		return space;
 		
 	} //end of getSpace.
+	
+	
 	
 	// "월"정보 입력하면 말일을 알려주는 메소드. getLastDate(월)
 	public static int getLastDate(int month) {
