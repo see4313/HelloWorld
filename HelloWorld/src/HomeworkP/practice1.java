@@ -28,6 +28,7 @@ public class practice1 {
 	}
 	// 평균
 	public int avg(int num1, int num2) {
+		num1 = addNum(10,20);
 		return(num1 + num2) / 2;
 		
 	}
