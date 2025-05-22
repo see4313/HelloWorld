@@ -6,9 +6,9 @@ public class practice1 {
 
 // 메소드 (addNum) ==> 기능만 만들어 놓은게 메소드....
 	public int addNum(int num1, int num2) {
-		int sum;
-		sum = num1 + num2;
-		return sum;
+		int sum = num1 + num2;
+		 return sum;
+		
 	} // end of addNum
 
 	// 문자열 반환하는메소드
@@ -26,6 +26,15 @@ public class practice1 {
 		}
 		return num1; 
 	}
+	// 평균
+	public int avg(int num1, int num2) {
+		return(num1 + num2) / 2;
+		
+	}
+	
+	
+			
+		
 
 // 생성자 
 } // end of class
