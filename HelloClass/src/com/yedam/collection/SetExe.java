@@ -13,8 +13,8 @@ public class SetExe {
 		set.add("금요일");
 		
 		//삭제
-		if (set.contains("홍길동")) {
-			System.out.println(set.remove("홍길동"));			
+		if (set.contains("홍길동")) {  //해당하는게 매개가 있는지 확인하늑네 contains
+			System.out.println(set.remove("홍길동"));	  //매개를 찾아서 삭제하는게 remove	
 		}
 		
 		// 추가(add), 삭제(remove), 
@@ -22,7 +22,7 @@ public class SetExe {
 		
 		//반복
 		Iterator<String> iter = set.iterator();  //반복자에 순번 붙임
-		while(iter.hasNext()) {  // 반복요소의 여부체크
+		while(iter.hasNext()) {  // 반복요소의 여부체크가 hasNext
 			String result = iter.next();  // next = 끄집어 내겠다
 			// 요소를 다 가지고와서 그중에 하나씩 끄집어 내서 찾아야해서 반복문 사용
 			System.out.println(result);

@@ -61,7 +61,7 @@ public class MemberExe {
 				telNo = scn.nextLine();
 
 				// 같은 값을 찾아서 변경하기.
-				for (int i = 0; i < members.size(); i++) {
+				for (int i = 0; i < members.size(); i++) { //size메소드 사용해서 값을 늘려주기
 					if (members.get(i).getMemberId().equals(id)) {
 						members.get(i).setPhone(telNo);
 						System.out.println("수정완료.");
@@ -77,7 +77,7 @@ public class MemberExe {
 				// 같은 값을 찾아서 삭제하기.
 				for (int i = 0; i < members.size(); i++) {
 					if (members.get(i).getMemberId().equals(id)) {
-						members.remove(i);
+						members.remove(i);  //삭제할때는 remove 라는 메소드 사용
 						System.out.println("삭제완료.");
 					}
 				}

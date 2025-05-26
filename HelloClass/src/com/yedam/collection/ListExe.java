@@ -11,21 +11,7 @@ import com.yedam.api.Member;
  * 리스트를 정리하는데 유용함
  * 
  */
-class Student {
-	private int studentNo; // 1001,1002,1003 ~ 1010
-	private int score;
-
-	public Student(int studentNo, int score) {
-		this.studentNo = studentNo;
-		this.score = score;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-}
-
+ 
 public class ListExe {
 	public static void main(String[] args) {
 		exe4();
