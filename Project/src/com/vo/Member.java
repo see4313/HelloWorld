@@ -9,19 +9,21 @@ public class Member {
 	private String classLevel;
 	private String classTime;
 
-	
-	//생성자
-	public Member() {}
-	public Member(String memberId ,String memberName, String phone, String memberDate, String classLevel, String classTime) {
+	// 생성자
+	public Member() {
+	}
+
+	public Member(String memberId, String memberName, String phone, String memberDate, String classLevel,
+			String classTime) {
 		this.memberId = memberId;
 		this.memberName = memberName;
 		this.phone = phone;
 		this.memberDate = memberDate;
 		this.classLevel = classLevel;
 		this.classTime = classTime;
-		
+
 	}
-	
+
 	// 기본정보 생성자
 	public Member(String memberId, String memberName, String phone, String memberDate) {
 		this.memberId = memberId;
@@ -29,29 +31,32 @@ public class Member {
 		this.phone = phone;
 		this.memberDate = memberDate;
 	}
-	 
-	public Member(String memberName, String phone) {
+
+	public Member(String memberId, String memberName, String phone) {
+		this.memberId = memberId;
 		this.memberName = memberName;
 		this.phone = phone;
-		
+
 	}
-	 
 	
-	//getter, setter
-	
-	
-	
+	public Member(String memberId) {
+		this.memberId = memberId;
+	}
+
+	// getter, setter
 
 	public String getMemberId() {
 		return memberId;
 	}
+
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
-	
+
 	public String getMemberName() {
 		return memberName;
 	}
+
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
@@ -87,19 +92,11 @@ public class Member {
 	public void setClassTime(String classTime) {
 		this.classTime = classTime;
 	}
-	
-	
-	
-	
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberName=" + memberName + ", phone=" + phone + ", memberDate="
 				+ memberDate + ", classLevel=" + classLevel + ", classTime=" + classTime + "]";
 	}
-	
-	
-	
-	
-	
 
 } // end of class

@@ -14,9 +14,11 @@ public class MemberApp {
 	public void execute() {
 		Scanner scn = new Scanner(System.in);
 		MemberDAO dao = new MemberDAO();
+		List<Member> list = new ArrayList<>();
+		
 		while (run) {
 			System.out.println("=============================================");
-			System.out.println("=================🏊‍ 밤스 아쿠아 🏊‍================");
+			System.out.println("================🏊‍밤스 아쿠아 🏊‍================");
 			System.out.println("=============================================");
 			System.out.println(" 1.회원가입 2.회원관리 3.수업관리 4.종료 ");
 			System.out.println(" 메뉴를 선택하세요>>");
@@ -49,7 +51,7 @@ public class MemberApp {
 				System.out.println(" 1. 회원수정    2. 회원삭제     3. 회원목록");
 				System.out.println("------------------------------------");
 				System.out.println("메뉴를 선택하세요>>");
-				
+
 				int membermenu = Integer.parseInt(scn.nextLine());
 
 				switch (membermenu) {
@@ -60,31 +62,59 @@ public class MemberApp {
 
 					System.out.println("🔎수정할회원의 아이디를 입력하세요 >>");
 					id = scn.nextLine();
-					
-					List<Member> list = new ArrayList<>();
+
 					list = dao.select();
-					
+
+
 					for (int i = 0; i < list.size(); i++) {
-						if(list.get(i).getMemberId().equals(id)) {
+						if (list.get(i).getMemberId().equals(id)) {
 							System.out.println("🔎변경할 이름을 입력하세요 >>");
 							name = scn.nextLine();
-							
+
 							System.out.println("🔎변경할 전화번호를 입력하세요 >>");
 							phone = scn.nextLine();
-							
-							Member member2 = new Member(name, phone);
-							if (dao.update(member2) == 1) {
+
+							Member member2 = new Member(id, name, phone);
+							if (MemberDAO.update(member2) == 1) {
 								System.out.println("수정완료");
 							}
-							
 						}
+					} // end of for
+				case 2:
+					System.out.println("--------------------------------------");
+					System.out.println("             💡 회원 정보 삭제             ");
+					System.out.println("---------------------------------------");
+
+					System.out.println("🔎삭제할회원의 아이디를 입력하세요 >>");
+					id = scn.nextLine();
+
+					Member dmember = new Member(id);
+					if (dao.delete(dmember) != 0) {
+						System.out.println("삭제 되었습니다😊");
+					} else {
+						System.out.println("삭제 실패했습니다😊");
 					}
+					break;
+
+				case 3: // 회원목록보기
+					System.out.println("--------------------------------------");
+					System.out.println("             💡 회원 정보 목록             ");
+					System.out.println("---------------------------------------");
+
+					System.out.println("🔎조회할회원의 아이디를 입력하세요 >>");
+					id = scn.nextLine();
 					
-					
+					List<Member> list1 = dao.list(id);
+
+					for (int i = 0; i < list1.size(); i++) {
+							System.out.printf("아이디: %s, 이름: %s, 전화번호: %s, 생년월일: %s\n", 
+									list1.get(i).getMemberId(), list1.get(i).getMemberName(),list1.get(i).getPhone(), list1.get(i).getMemberDate());	
+					}
+					break;
 
 				} // end of switch(membermenu)
-
-			}// end of switchmenu)
+				break;
+			}// end of (switchmenu)
 		} // end of while
 	} // end of execute
 
