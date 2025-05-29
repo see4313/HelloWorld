@@ -38,3 +38,19 @@ create table swim_class(class_level VARCHAR2(30)not null,
                           );
 SELECT
     * FROM swim_class; 
+    
+insert into swim_class
+            ( class_level,
+            teacher,
+            subject)
+values ( '초급',
+        '밤비',
+        '호흡배우기');
+        
+insert into swim_class
+            ( class_level,
+            teacher,
+            subject)
+values ( '초급',
+        '밤비',
+        '자유형발차기');

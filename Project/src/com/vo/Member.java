@@ -23,6 +23,16 @@ public class Member {
 		this.classTime = classTime;
 
 	}
+	
+	public Member(String memberId, String memberName, String phone, String classLevel,
+			String classTime) {
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.phone = phone;
+		this.classLevel = classLevel;
+		this.classTime = classTime;
+
+	}
 
 	// 기본정보 생성자
 	public Member(String memberId, String memberName, String phone, String memberDate) {

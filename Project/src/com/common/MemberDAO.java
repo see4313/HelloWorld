@@ -24,6 +24,7 @@ public class MemberDAO extends DAO {
 			psmt.setString(2, member.getMemberName());
 			psmt.setString(3, member.getPhone());
 			psmt.setString(4, member.getMemberDate());
+			
 
 			int r = psmt.executeUpdate();
 			return r;
@@ -39,7 +40,7 @@ public class MemberDAO extends DAO {
 
 	// 수정
 	public static int update(Member member) {
-		String sql = "update swim_member set member_name = ?, phone = ? where member_id = ?";
+		String sql = "update swim_member set member_name = ?, phone = ?, class_level = ?, class_time = ? where member_id = ?";
 
 		getConnect();
 		try {
@@ -47,7 +48,10 @@ public class MemberDAO extends DAO {
 
 			psmt.setString(1, member.getMemberName());
 			psmt.setString(2, member.getPhone());
-			psmt.setString(3, member.getMemberId());
+			psmt.setString(3, member.getClassLevel());
+			psmt.setString(4, member.getClassTime());
+			psmt.setString(5, member.getMemberId());
+			
 
 			int r = psmt.executeUpdate();
 			return r;
@@ -62,7 +66,7 @@ public class MemberDAO extends DAO {
 	}// end of update
 
 	public List<Member> select() {
-		String sql = "select member_id, member_name, phone from swim_member";
+		String sql = "select member_id, member_name, phone, class_level, class_time from swim_member";
 
 		getConnect();
 		List<Member> list = new ArrayList<Member>();
@@ -72,9 +76,11 @@ public class MemberDAO extends DAO {
 			rs = psmt.executeQuery();
 			while (rs.next()) {
 				Member member = new Member();
-				member.setMemberId(rs.getNString("member_id"));
+				member.setMemberId(rs.getString("member_id"));
 				member.setMemberName(rs.getString("member_name"));
 				member.setPhone(rs.getString("phone"));
+				member.setClassLevel(rs.getString("class_level"));
+				member.setClassTime(rs.getString("class_time"));
 				list.add(member);
 			}
 		} catch (SQLException e) {
@@ -109,12 +115,7 @@ public class MemberDAO extends DAO {
 	//목록
 	public List<Member> list(String id) {
 
-		String sql = "select member_id,\r\n"
-				+ "       member_name,\r\n"
-				+ "       phone,\r\n"
-				+ "       member_date\r\n"
-				+ " from swim_member\r\n"
-				+ " where member_id = ? ";
+		String sql = "select member_id, member_name, phone, member_date, class_level, class_time from swim_member where member_id = ?";
 		
 		getConnect();
 		List<Member> list = new ArrayList<>();
@@ -131,11 +132,14 @@ public class MemberDAO extends DAO {
 				member.setMemberName(rs.getString("member_name"));
 				member.setPhone(rs.getString("phone"));
 				member.setMemberDate(rs.getString("member_date"));
+				member.setClassLevel(rs.getString("class_level"));
+				member.setClassTime(rs.getString("class_time"));
 				
 				list.add(member);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
+			
 		}
 
 		return list;
