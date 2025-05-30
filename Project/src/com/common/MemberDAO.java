@@ -14,6 +14,7 @@ import com.vo.Member;
 public class MemberDAO extends DAO {
 
 	public int insert(Member member) {
+		System.out.println(member);
 		String sql = "insert into swim_member (member_id, member_name, phone, member_date)" + "values(?,?,?,?)";
 
 		getConnect();
@@ -39,7 +40,7 @@ public class MemberDAO extends DAO {
 	} // end of insert
 
 	// 수정
-	public static int update(Member member) {
+	public int update(Member member) {
 		String sql = "update swim_member set member_name = ?, phone = ?, class_level = ?, class_time = ? where member_id = ?";
 
 		getConnect();
