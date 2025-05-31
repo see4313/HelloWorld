@@ -72,8 +72,70 @@ values ( '중급',
         '밤비',
         '평영발차기');
 
+insert into swim_class
+            ( class_level,
+            teacher,
+            subject)
+values ( '고급',
+        '킹콩',
+        '접영완성');
+        
+        insert into swim_class
+            ( class_level,
+            teacher,
+            subject)
+values ( '마스터',
+        '호남',
+        '오리발');
+        
 select class_level,
        teacher,
        subject
 from swim_class
 where class_level = '초급';
+
+
+create table teacher ( 
+                        name VARCHAR2(30),
+                          phone varchar(30),
+                          gender varchar2(30)
+                          );
+                        
+        
+insert into teacher ( name,
+                     phone,
+                     gender)
+values ('손이영',
+        '01055558888',
+        '여자');
+        
+insert into teacher ( name,
+                     phone,
+                     gender)
+values ('김동동',
+        '010588884444',
+        '남자');        
+                      
+SELEct * from teacher;
+
+insert into swim_class
+            ( class_level,
+            teacher,
+            subject)
+values ( '고급',
+        '김동동',
+        '접영완성');
+
+insert into swim_class
+            ( class_level,
+            teacher,
+            subject)
+values ( '고급',
+        '손이영',
+        '자유형완성');
+
+select *
+from teacher 
+where name = (select teacher
+             from swim_class
+             where subject= '접영완성');

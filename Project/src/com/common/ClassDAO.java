@@ -7,6 +7,33 @@ import java.util.List;
 import com.vo.SwimClass;
 
 public class ClassDAO extends DAO {
+	
+	// 전체조회
+	public List<SwimClass> select() {
+		String sql = "select * from swim_class";
+
+		getConnect();
+		List<SwimClass> classlist = new ArrayList<>();
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				SwimClass member = new SwimClass();
+
+				member.setClassLevel(rs.getNString("class_level"));
+				member.setTeacher(rs.getNString("teacher"));
+				member.setSubject(rs.getNString("subject"));
+
+				classlist.add(member);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return classlist;
+	}
 
 	// 과목등록
 	public int insert(SwimClass swimclass) {
@@ -71,6 +98,7 @@ public class ClassDAO extends DAO {
 			psmt.setString(2, swimclass.getSubject());
 					
 			int r = psmt.executeUpdate();
+			System.out.println(r);
 			return r;
 
 		} catch (SQLException e) {

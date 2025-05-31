@@ -14,7 +14,6 @@ import com.vo.Member;
 public class MemberDAO extends DAO {
 
 	public int insert(Member member) {
-		System.out.println(member);
 		String sql = "insert into swim_member (member_id, member_name, phone, member_date)" + "values(?,?,?,?)";
 
 		getConnect();
@@ -26,6 +25,10 @@ public class MemberDAO extends DAO {
 			psmt.setString(3, member.getPhone());
 			psmt.setString(4, member.getMemberDate());
 			
+			if(member.getMemberId().equals("")||member.getMemberName().equals("")|| member.getPhone().equals("")||member.getMemberDate().equals("") ) { 
+				System.out.println("다시 입력하세요🥲");
+				return 0;
+			} 
 
 			int r = psmt.executeUpdate();
 			return r;
