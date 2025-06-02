@@ -37,9 +37,7 @@ from swim_member;
 delete from swim_member
 where member_id = 'user02';
 
-commit;
-select *
-from swim_member;
+
 
 select member_id,
        member_name,
@@ -61,7 +59,7 @@ insert into swim_class
             teacher,
             subject)
 values ( '초급',
-        '밤비',
+        '손이영',
         '호흡배우기');
         
 insert into swim_class
@@ -69,7 +67,7 @@ insert into swim_class
             teacher,
             subject)
 values ( '중급',
-        '밤비',
+        '김동동',
         '평영발차기');
 
 insert into swim_class
@@ -94,7 +92,8 @@ select class_level,
 from swim_class
 where class_level = '초급';
 
-
+/*테이블생성
+*/
 create table teacher ( 
                         name VARCHAR2(30),
                           phone varchar(30),
@@ -106,15 +105,43 @@ insert into teacher ( name,
                      phone,
                      gender)
 values ('손이영',
-        '01055558888',
+        '01011112222',
+        '여자');
+        
+        insert into teacher ( name,
+                     phone,
+                     gender)
+values ('김해민',
+        '01022223333',
         '여자');
         
 insert into teacher ( name,
                      phone,
                      gender)
-values ('김동동',
-        '010588884444',
-        '남자');        
+values ('김예지',
+        '01088884444',
+        '여자');
+        
+ insert into teacher ( name,
+                     phone,
+                     gender)
+values ('홍길동',
+        '01033334444',
+        '남자');  
+        
+insert into teacher ( name,
+                     phone,
+                     gender)
+values ('박호준',
+        '01055556666',
+        '남자');    
+        
+insert into teacher ( name,
+                     phone,
+                     gender)
+values ('김준범',
+        '01011118888',
+        '남자');     
                       
 SELEct * from teacher;
 
@@ -134,8 +161,14 @@ values ( '고급',
         '손이영',
         '자유형완성');
 
-select *
-from teacher 
+select * 
+from teacher
 where name = (select teacher
              from swim_class
-             where subject= '접영완성');
+             where subject= '평영발차기');
+
+select *
+from teacher;
+
+select * from swim_class;
+select * from swim_member;

@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 
 public class DAO {
-	static String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	static String url = "jdbc:oracle:thin:@192.168.0.28:1521:xe";
 	static String id = "project1";
 	static String pwd = "project1";
 	static Connection conn;

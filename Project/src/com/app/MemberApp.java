@@ -168,7 +168,7 @@ public class MemberApp {
 						break;
 					}
 					for (int i = 0; i < list1.size(); i++) {
-						System.out.printf("아이디: %s, 이름: %s, 전화번호: %s, 생년월일: %s, 레벨: %s, 수업시간: %s\n",
+						System.out.printf("아이디: %s, 이름: %s, 전화번호: %s, 생년월일: %s,\n레벨: %s, 수업시간: %s\n",
 								list1.get(i).getMemberId(), list1.get(i).getMemberName(), list1.get(i).getPhone(),
 								list1.get(i).getMemberDate(), list1.get(i).getClassLevel(),
 								list1.get(i).getClassTime());
@@ -214,18 +214,19 @@ public class MemberApp {
 						break;
 					}
 					for (int i = 0; i < classlist.size(); i++) {
-						System.out.printf("레벨: %s, 강사이름: %s, 수업: %s\n", classlist.get(i).getClassLevel(),
-								classlist.get(i).getTeacher(), classlist.get(i).getSubject());
+						System.out.printf("레벨: %s, 수업: %s, 강사이름: %s\n", classlist.get(i).getClassLevel(),
+								classlist.get(i).getSubject(),classlist.get(i).getTeacher());
+					
 					}
 
 					while (true) {
-						System.out.println("🔎수강하는 수업이름을 입력하세요");
+						System.out.println("🔎수강하는 수업을 입력하세요>>");
 						String tname = scn.nextLine();
 						
 						List<Teacher> tlist = tdao.select(tname);
 
 						if (tlist.isEmpty()) {
-							System.out.println("수업이름을 잘못입력하였습니다");
+							System.out.println("수업을 잘못입력하였습니다😊");
 							continue;
 						} else {
 							System.out.printf("강사이름: %s, 전화번호: %s, 성별: %s\n", tlist.get(0).getName(),
