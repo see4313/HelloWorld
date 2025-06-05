@@ -8,13 +8,34 @@
 	<select id="selectList" resultType="com.yedam.vo.BoardVO">
 		select * from tbl_board
 	</select>
+	
+	<!-- 상세조회(selectBoard) -->
+	<select id="selectBoard" parameterType="int" resultType="Board">
+	select board_no
+	       ,title
+	       ,content
+	       ,writer
+	       ,write_date
+	       ,read_cnt
+	 from tbl_board
+	where board_no = #{bno}    
+	</select> <!-- 주소값이 아이디로 들어감 -->
 
+	<!-- 조회수증가 -->
+	<update id = "updateReadCnt" parameterType="int">
+	update tbl_board
+	set    read_cnt = read_cnt +1
+	where board_no = #{bno}
+	</update>
+	
 	<!-- 등록(insertBoard) -->
 	<insert id="insertBoard" parameterType="Board"> <!-- mybatis에서 board안에 com.yedam.vo.BoardVO값을 넣어서 그냥 board만 사용가능 -->
 		insert into tbl_board(board_no, title, content, writer)
 		values(board_seq.nextval, #{title}, #{content}, #{writer})  <!-- {}안에 있는 
 			값은 BoardVO가 가지고있는 필드 -->
 	</insert>
+
+
 
 	<!-- 수정(updateBoard) -->
 	<update id="updateBoard" parameterType="Board">
