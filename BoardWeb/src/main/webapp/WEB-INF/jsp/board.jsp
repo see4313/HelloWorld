@@ -36,6 +36,7 @@ System.out.println(board);
 			<td colspan="4" align="center"><input type="submit" value="수정"
 				class="btn btn-warning">
 				<button class="btn btn-danger" type='button'>삭제</button></td> <!-- 타입을 버튼으로 작성해줘야 밑에 script부분이 실행이 됨 -> 버튼을 눌렀을때 실행되야 삭제 됨 -->
+				<!-- 타입을 버튼으로 안줬으면 기본값인 submit으로 실행됨, submit으로 실행되면 밑에 script가 아닌 form태그를 실행시킴 -->
 		</tr>
 	</table>
 </form>
