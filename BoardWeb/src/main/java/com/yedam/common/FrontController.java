@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.yedam.control.AddBoardControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.ModifyBoardControl;
+import com.yedam.control.RemoveBoardControl;
 
 /*
  * M-V-Control 역할
@@ -31,9 +33,12 @@ public class FrontController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException { // init은 최초로 한번만 실행됨
 		// boardList.do -> 글목록 출력 기능만들기 (.do는 web.xml에 입력되어있음)
 		//처리순서가 중요
-		map.put("/boardList.do", new BoardListControl());
-		map.put("/board.do", new BoardControl());
+		map.put("/boardList.do", new BoardListControl());   //글목록
+		map.put("/board.do", new BoardControl());           //상세화면
 		map.put("/addBoard.do", new AddBoardControl());
+		map.put("/modifyBoard.do", new ModifyBoardControl());  // 글수정화면
+		map.put("/removeBoard.do", new RemoveBoardControl());  // 글삭제화면
+		
 
 	}
 

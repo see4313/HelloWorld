@@ -10,7 +10,8 @@ import com.yedam.vo.BoardVO;
  */
 
 public interface BoardMapper {
-	public List<BoardVO> selectList();     //목록조회기능
+	public List<BoardVO> selectList();     // 전체목록조회기능 사용X
+	public List<BoardVO> selectListWithPaging(int page);  // 페이지목록 만드는 기능
 	public BoardVO selectBoard(int bno);   //단건조회기능 (게시글순서중에 하나를 눌렀을때)
 	public int updateReadCnt(int bno);   // 조회 count 증가기능
 	public int insertBoard(BoardVO board);
