@@ -21,7 +21,6 @@ public class PageDTO {
 		
 		// 이전, 이후 페이지가 있는지 존재 체크 (next 
 		this.prev = this.start > 1; // start페이지가 1이 아니면 무조건 존재함
-		
 		this.next = this.end < realEnd;
 		
 	}

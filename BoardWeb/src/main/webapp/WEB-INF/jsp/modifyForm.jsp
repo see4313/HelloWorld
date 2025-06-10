@@ -5,11 +5,19 @@
 
 <h3>수정화면(modify.jsp)</h3>
 <%
-BoardVO board = (BoardVO) request.getAttribute("board");
+  BoardVO board = (BoardVO) request.getAttribute("board");
+
+  String pg = (String) request.getAttribute("page");
+  String sc = (String) request.getAttribute("searchCondition");
+  String kw = (String) request.getAttribute("keyword");
 %>
 
-<form action="modifyBoard.do" method="post">
+<form action="modifyBoard.do" method="post" >
 <input type="hidden" name="bno" value="<%=board.getBoardNo()%>">
+<input type="hidden" name="page" value="<%=pg %>">
+	<input type="hidden" name="searchCondition" value="<%=sc %>">
+	<input type="hidden" name="keyword" value="<%=kw %>">
+	
 	<table class="table">
 		<tr>
 			<th>글번호</th>
@@ -19,7 +27,7 @@ BoardVO board = (BoardVO) request.getAttribute("board");
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td colspan="3"><input type="text" name="title" value="<%=board.getTitle()%>>"></td>
+			<td colspan="3"><input type="text" name="title" value="<%=board.getTitle()%>"></td>
 		</tr>
 		<tr>
 			<th>내용</th>

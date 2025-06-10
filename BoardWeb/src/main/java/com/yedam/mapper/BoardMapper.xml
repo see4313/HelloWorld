@@ -7,42 +7,57 @@
 	<!-- 조회(selectBoard) -->
 	<select id="selectList" resultType="com.yedam.vo.BoardVO">
 		select * from tbl_board
-		order by board_no
+		order
+		by board_no
 	</select>
-	
-	
+
+
 	<!-- 페이징 조회 -->
-	<select id= "selectListWithPaging" parameterType="int" resultType="Board">
-	select b.*
-    from (select rownum rn, a.*
-          from (select *
-          from tbl_board
-          order by board_no desc) a) b
-    where b.rn > (#{page} -1) * 5 
+	<select id="selectListWithPaging" parameterType="Search" resultType="Board">
+		select b.*
+		from (select rownum rn, a.*
+		      from (select *
+		            from tbl_board
+		
+		<choose>  <!-- 조건문 choose -->
+		<when test="searchCondition != null and searchCondition == 'T'.toString()" ><!-- 문자열비교인 equals 사용 불가능해서 == 뒤로 toString 사용 -->
+		where title like '%'||#{keyword}||'%' 
+		</when>
+		
+		<when test="searchCondition != null and searchCondition == 'W'.toString()" >
+		where writer like '%'||#{keyword}||'%'
+		</when>
+		
+		<when test = "searchCondition != null and searchCondition == 'TW'.toString()" >
+		where (title like '%'||#{keyword}||'%') or (writer like '%'||#{keyword}||'%')
+		</when>
+		</choose>
+		order by board_no desc) a) b
+		where b.rn > (#{page} -1) * 5 
     <![CDATA[ 
  and b.rn <= #{page} * 5
-    ]]> <!-- CDATA로 감싸는 이유는 꺽세있으면 시작으로 인지해서 오류뜨기때문  -->
+    ]]> <!-- CDATA로 감싸는 이유는 꺽세있으면 시작으로 인지해서 오류뜨기때문 -->
 	</select>
-	
+
 	<!-- 상세조회(selectBoard) -->
 	<select id="selectBoard" parameterType="int" resultType="Board">
-	select board_no
-	       ,title
-	       ,content
-	       ,writer
-	       ,write_date
-	       ,read_cnt
-	 from tbl_board
-	where board_no = #{bno}    
+		select board_no
+		,title
+		,content
+		,writer
+		,write_date
+		,read_cnt
+		from tbl_board
+		where board_no = #{bno}
 	</select> <!-- 주소값이 아이디로 들어감 -->
 
 	<!-- 조회수증가 -->
-	<update id = "updateReadCnt" parameterType="int">
-	update tbl_board
-	set    read_cnt = read_cnt +1
-	where board_no = #{bno}
+	<update id="updateReadCnt" parameterType="int">
+		update tbl_board
+		set read_cnt = read_cnt +1
+		where board_no = #{bno}
 	</update>
-	
+
 	<!-- 등록(insertBoard) -->
 	<insert id="insertBoard" parameterType="Board"> <!-- mybatis에서 board안에 com.yedam.vo.BoardVO값을 넣어서 그냥 board만 사용가능 -->
 		insert into tbl_board(board_no, title, content, writer)
@@ -72,9 +87,28 @@
 	<!-- 삭제(deleteBoard) parameterType="int" (보드넘버가 int타입) -->
 	<delete id="deleteBoard" parameterType="int">
 		delete tbl_board
-		where board_no = #{boardNo}
+		where
+		board_no = #{boardNo}
 	</delete>
 
+
+	<!-- 전체건수 -->
+	<select id="selectCount" resultType="int" parameterType= "Search">
+	select count(1) from tbl_board
+	<choose>  <!-- 조건문 choose -->
+		<when test="searchCondition != null and searchCondition == 'T'.toString()" ><!-- 문자열비교인 equals 사용 불가능해서 == 뒤로 toString 사용 -->
+		where title like '%'||#{keyword}||'%' 
+		</when>
+		
+		<when test="searchCondition != null and searchCondition == 'W'.toString()" >
+		where writer like '%'||#{keyword}||'%'
+		</when>
+		
+		<when test = "searchCondition != null and searchCondition == 'TW'.toString()" >
+		where (title like '%'||#{keyword}||'%') or (writer like '%'||#{keyword}||'%')
+		</when>
+		</choose>
+	</select>
 
 
 </mapper>
