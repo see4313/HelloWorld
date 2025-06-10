@@ -43,3 +43,34 @@ from tbl_board;
 
 select count(*)
 from tbl_board;
+
+create table tbl_member ( 
+                         member_id varchar2(30) primary key,
+                         member_name varchar2(100) not null,
+                         password varchar2(50) not null,
+                         reponsibility varchar2(10) default 'User');
+                         
+                         
+insert into tbl_member 
+values ('user01', '¼ÕÀÌ¿µ', '1111', 'User');
+
+insert into tbl_member 
+values ('user03', '±èµ¿µ¿', '2222', 'User');
+
+insert into tbl_member 
+values ('user99', 'ÇÎÇÎÀÌ', '3333', 'User');
+
+insert into tbl_member 
+values ('user98', '½ºÆùÁö¹ä', '4444', 'User');
+
+insert into tbl_member 
+values ('user97', '¶×ÀÌ', '5555', 'User');
+
+insert into tbl_member 
+values ('user96', 'Â¡Â¡ÀÌ', '6666', 'User');
+
+select *
+from tbl_member;
+
+
+        
