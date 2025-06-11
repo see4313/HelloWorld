@@ -2,6 +2,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!-- c태그 사용하려면 라이브러리 넣어줘야됨 -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>  <!-- format타입으로 사용하라면 라이브러리 넣어줘야됨 -->
+
+
 <%
   BoardVO board = (BoardVO) request.getAttribute("board");
 
@@ -26,22 +31,31 @@
 		</tr>
 		<tr>
 			<th>제목</th>
-			<td colspan="3"><%=board.getTitle()%></td>
+			<td colspan="3">${board.title }</td>
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td colspan="3"><textarea cols="45" rows="4" readonly><%=board.getContent()%></textarea></td>
+			<td colspan="3"><textarea cols="45" rows="4" readonly>${board.content}</textarea></td>
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td colspan="3"><%=board.getWriter()%></td>
+			<td colspan="3">${board.writer }</td>
 		</tr>
 		<tr>
 			<th>작성일시</th>
-			<td colspan="3"><%=board.getWriteDate()%></td>
+			<td colspan="3">${board.writeDate }</td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">
+			<!--<c:choose>
+			  <c:when test="${board.writer == }">
+			  
+			  </c:when>
+			  <c:otherwise>
+			  
+			  </c:otherwise>
+			</c:choose> --!>
+			
 			 	<%if (board.getWriter().equals(logId)) {%>
 			<input type="submit" value="수정" class="btn btn-warning" >
 				<button class="btn btn-danger" type='button'>삭제</button> <!-- 타입을 버튼으로 작성해줘야 밑에 script부분이 실행이 됨 -> 버튼을 눌렀을때 실행되야 삭제 됨 -->

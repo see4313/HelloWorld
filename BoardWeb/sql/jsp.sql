@@ -72,5 +72,7 @@ values ('user96', 'Â¡Â¡ÀÌ', '6666', 'User');
 select *
 from tbl_member;
 
-
+update tbl_member
+set reponsibility = 'Admin'
+where Member_name = '¼ÕÀÌ¿µ';
         
