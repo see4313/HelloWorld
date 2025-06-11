@@ -13,5 +13,17 @@
 	  where member_id = #{id}
 	  and   password = #{pw}
 	</select>
+	<!--  #, $의 차이  -->
+	
+	<!-- 회원목록 -->
+	<select id="selectList" resultType="Member" parameterType="string">
+	select member_id,
+	         member_name,
+	         password,
+	         reponsibility
+	  from tbl_member
+	  order by ${order}
+	
+	</select>
 
 </mapper>

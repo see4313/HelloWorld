@@ -24,7 +24,7 @@ public class AddBoardControl implements Control {
 		if (req.getMethod().equals("GET")) { // 비교할 값안에는 반드시 대문자사용
 			// WEB-INF/jsp/addBoard.jsp를 통해 폼 열어줌
 
-			req.getRequestDispatcher("WEB-INF/jsp/addBoard.jsp").forward(req, resp); // getRequestDispatcher는 요청하는 요청페이지를 재지정함 forward 같이 사용
+			req.getRequestDispatcher("user/addBoard.tiles").forward(req, resp); // getRequestDispatcher는 요청하는 요청페이지를 재지정함 forward 같이 사용
 																						
 
 		} else if (req.getMethod().equals("POST")) { // 글을 등록. 요청방법이 post

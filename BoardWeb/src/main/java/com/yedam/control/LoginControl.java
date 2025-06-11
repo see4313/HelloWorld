@@ -30,8 +30,13 @@ public class LoginControl implements Control {
 			HttpSession session = req.getSession();   // cookie 정보를 읽어와서 session이 만들어짐
 			session.setAttribute("logId", member.getMemberId());  // session객체는 어느곳에서든지 접근 가능 (그래서 로그아웃하기전까지 다른곳으로 이동 가능)
 			
+			//권한에 따라 시작페이지를 차별화
+			if(member.getReponsibility().equals("User")){
+				resp.sendRedirect("addBoard.do");   // 정상적으로 등록되면 등록 화면으로 이동
+			} else if(member.getReponsibility().equals("Admin")) {
+				resp.sendRedirect("memberList.do");
+			}
 			
-			resp.sendRedirect("addBoard.do");   // 정상적으로 등록되면 등록 화면으로 이동
 		} else {  // 로그인 실패
 			req.setAttribute("msg", "ID와 PW를 확인하세요!");
 			req.getRequestDispatcher("WEB-INF/jsp/loginForm.jsp").forward(req, resp);   // 로그인화면으로 다시이동

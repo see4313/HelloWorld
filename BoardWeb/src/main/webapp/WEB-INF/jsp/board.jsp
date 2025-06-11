@@ -1,7 +1,7 @@
 <%@page import="com.yedam.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../include/header.jsp" />
+
 <%
   BoardVO board = (BoardVO) request.getAttribute("board");
 
@@ -13,16 +13,16 @@
 %>
 <h3>상세화면(board.jsp)</h3>
 <form action="modifyBoard.do">
-	<input type="hidden" name="bno" value="<%=board.getBoardNo()%>">
-	<input type="hidden" name="page" value="<%=pg %>">
-	<input type="hidden" name="searchCondition" value="<%=sc %>">
-	<input type="hidden" name="keyword" value="<%=kw %>">
+	<input type="hidden" name="bno" value="${board.boardNo}">
+	<input type="hidden" name="page" value="${pg } ">
+	<input type="hidden" name="searchCondition" value="${sc } }">
+	<input type="hidden" name="keyword" value="${kw } }">
 	<table class="table">
 		<tr>
 			<th>글번호</th>
-			<td><%=board.getBoardNo()%></td>
+			<td>${board.boardNo }</td>
 			<th>조회수</th>
-			<td><%=board.getReadCnt()%></td>
+			<td>${board.readCnt}</td>
 		</tr>
 		<tr>
 			<th>제목</th>
@@ -61,4 +61,3 @@ document.querySelector('button.btn-danger').addEventListener('click', function()
 	location.href = 'removeBoard.do?bno=' +bno; //href사용하면 get방식
 })
 </script>
-<jsp:include page="../include/footer.jsp" />

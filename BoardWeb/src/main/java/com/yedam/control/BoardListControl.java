@@ -55,7 +55,7 @@ public class BoardListControl implements Control {
 		req.setAttribute("search", search);
 		
 		// 요청재지정(페이지이동)
-		req.getRequestDispatcher("WEB-INF/jsp/boardList.jsp").forward(req, resp); // forward 사용자와 한번 요청되고나면 계속해서 요청정보가 유지되는방법 . 예를들면 사용자가 한번 로그인했으면 로그아웃하기전까지 계속 로그인되어있는것
+		req.getRequestDispatcher("user/boardList.tiles").forward(req, resp); // forward 사용자와 한번 요청되고나면 계속해서 요청정보가 유지되는방법 . 예를들면 사용자가 한번 로그인했으면 로그아웃하기전까지 계속 로그인되어있는것
 		
 	}
 	
