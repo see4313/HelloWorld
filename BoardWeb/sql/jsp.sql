@@ -99,7 +99,7 @@ values (reply_seq.nextval, 213, '댓글작업하기', 'user01');
 
 select *
 from tbl_reply
-where board_no = 221;
+where board_no = 213;
 
 
 
