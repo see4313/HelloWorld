@@ -29,6 +29,8 @@ public class LoginControl implements Control {
 			// 세션객체에 setAttribute("logId", member.memberId)
 			HttpSession session = req.getSession();   // cookie 정보를 읽어와서 session이 만들어짐
 			session.setAttribute("logId", member.getMemberId());  // session객체는 어느곳에서든지 접근 가능 (그래서 로그아웃하기전까지 다른곳으로 이동 가능)
+			session.setAttribute("auth", member.getReponsibility()); 
+			
 			
 			//권한에 따라 시작페이지를 차별화
 			if(member.getReponsibility().equals("User")){

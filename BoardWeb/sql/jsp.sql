@@ -76,3 +76,30 @@ update tbl_member
 set reponsibility = 'Admin'
 where Member_name = '손이영';
         
+
+--댓글테이블
+create sequence reply_seq;
+create table tbl_reply(reply_no number    --댓글번호
+                       ,board_no number not null   --원본글번호
+                       ,reply varchar2(300) not null   --댓글내용
+                       ,replyer varchar2(100) not null  --댓글작성자
+                       ,reply_date date default sysdate);   --작성일시
+alter table tbl_reply add constraint pk_reply
+                                      primary key(reply_no);
+
+--221번 글에 대한 댓글
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 213, '213번의 댓글입니다.', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 213, '213번의 누구입니까?', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 213, '댓글작업하기', 'user01');
+
+select *
+from tbl_reply
+where board_no = 221;
+
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.mapper.ReplyMapper">
+
+<!-- 단건조회 -->
+	<select id = "selectReply" parameterType="int" resultType ="Reply">
+	select *
+	from tbl_reply
+	where reply_no = #{replyNo}
+	</select>
+
+<!-- 목록(boardList) -->
+	<select id = "replyList" parameterType="int" resultType ="Reply">
+	select *
+	from tbl_reply
+	where board_no = #{boardNo}
+	</select>
+	
+	<!-- 등록(insertBoard) -->
+	<insert id="insertReply" parameterType="Reply">
+		insert into tbl_reply(reply_no, board_no, reply, replyer)
+		values(reply_seq.nextval, #{boardNo}, #{reply}, #{replyer})  
+	</insert>
+	
+<!-- 삭제(deleteBoard) -->
+	<delete id="deleteReply" parameterType="int">
+		delete tbl_reply
+		where
+		reply_no = #{replyNo}
+	</delete>
+
+
+
+
+</mapper>

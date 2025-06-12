@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.yedam.common.Control;
 import com.yedam.common.PageDTO;
@@ -54,9 +55,16 @@ public class BoardListControl implements Control {
 		req.setAttribute("pageInfo", paging);
 		req.setAttribute("search", search);
 		
-		// 요청재지정(페이지이동)
-		req.getRequestDispatcher("user/boardList.tiles").forward(req, resp); // forward 사용자와 한번 요청되고나면 계속해서 요청정보가 유지되는방법 . 예를들면 사용자가 한번 로그인했으면 로그아웃하기전까지 계속 로그인되어있는것
-		
+		HttpSession session = req.getSession();
+		String auth = (String) session.getAttribute("auth");
+		// 요청재지정(페이지이동) admin/board/
+		if(auth != null && auth.equals("User")/*일반사용자*/) {
+			req.getRequestDispatcher("user/boardList.tiles").forward(req, resp); // forward 사용자와 한번 요청되고나면 계속해서 요청정보가 유지되는방법 . 예를들면 사용자가 한번 로그인했으면 로그아웃하기전까지 계속 로그인되어있는것			
+		} else if(auth != null && auth.equals("Admin")/*관리자*/) {
+			req.getRequestDispatcher("admin/board/boardList.tiles").forward(req, resp);  //관리자로 로그인했을때			
+		} else {
+			req.getRequestDispatcher("user/boardList.tiles").forward(req, resp);
+		}
 	}
 	
 
