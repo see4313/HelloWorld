@@ -88,6 +88,16 @@ alter table tbl_reply add constraint pk_reply
                                       primary key(reply_no);
 
 --221번 글에 대한 댓글
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 221, '221번의 댓글입니다.', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 221, '221번의 누구입니까?', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 221, '댓글연습중임', 'user01');
+
 insert into tbl_reply (reply_no, board_no, reply, replyer)
 values (reply_seq.nextval, 213, '213번의 댓글입니다.', 'user01');
 
@@ -99,7 +109,7 @@ values (reply_seq.nextval, 213, '댓글작업하기', 'user01');
 
 select *
 from tbl_reply
-where board_no = 213;
+where board_no = 221;
 
 
 
