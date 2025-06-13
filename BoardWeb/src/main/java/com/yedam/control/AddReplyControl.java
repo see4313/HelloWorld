@@ -1,11 +1,15 @@
 package com.yedam.control;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
@@ -17,7 +21,8 @@ public class AddReplyControl implements Control {
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// 댓글등록. 
 		// 원본댓글, 댓글작성자, 댓글
-		resp.setContentType("text/json;charset=utf-8");   // 웹화면에서 한글로 처리되게해주는 컨텐트타입
+		req.setCharacterEncoding("utf-8");   // 목록에서 한글로 처리되게해주는 컨텐트타입
+		resp.setContentType("text/json;charset=utf-8");   // 응답화면에서 한글로 처리되게해주는 컨텐트타입
 		String bno = req.getParameter("bno");      // 원본글에대한 번호
 		String reply = req.getParameter("reply");    // 댓글의 내용
 		String replyer = req.getParameter("replyer");  // 댓글의 작성자
@@ -27,15 +32,25 @@ public class AddReplyControl implements Control {
 		rvo.setReply(reply);
 		rvo.setReplyer(replyer);
 		
+		// Json 문자열을 생성하는 함수
+		Map<String, Object> map = new HashMap<>();
+		Gson gson = new GsonBuilder().create();
+		
 		// DB입력처리
 		ReplyService svc = new ReplyServiceImpl();
-		if (svc.addReply(rvo)) {//등록이 되었을때 
-			//{"retCode" : "Success"}
-			resp.getWriter().print("{\"retCode\" : \"Success\"}");
-		} else {  // 등록에 실패했을떄 
-			//{"retCode" : "Fail"}
-			resp.getWriter().print("{\"retCode\" : \"Fail\"}");
+		if (svc.addReply(rvo)) {
+			//{"retCode" : "Success"} 등록이 되었을때 
+			map.put("retVal", rvo);
+			map.put("retCode", "Success");
+//			resp.getWriter().print("{\"retCode\" : \"Success\"}");		
+		} else { 
+			//{"retCode" : "Fail"}  등록에 실패했을떄 
+			map.put("retCode", "Fail");
+//			resp.getWriter().print("{\"retCode\" : \"Fail\"}");
 		}
+		String json = gson.toJson(map);
+		System.out.println(json);
+		resp.getWriter().print(json);
 		
 		
 		

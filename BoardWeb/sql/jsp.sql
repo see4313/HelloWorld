@@ -111,5 +111,8 @@ select *
 from tbl_reply
 where board_no = 221;
 
+ select reply_seq.nextval 
+ from dual;
+
 
 
