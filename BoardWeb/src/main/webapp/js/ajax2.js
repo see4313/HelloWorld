@@ -1,13 +1,13 @@
 /**
  *  ajax2.js
  */
-console.log(add(10, 20)); // add라는 함수를 사용해서 더하기함
+console.log(svc.add(10, 20)); // add라는 함수를 사용해서 더하기함
 
 // 목록을 출력해주는 메소드를 활용
 svc.replyList(221,  // 게시글 번호
 	function(result) {  // 매개값은 result
 		console.log(result);
-		result.forEach(function(item) {
+		result.forEach(function(item) {  //forEach 반복문 사용해서 각각의 한줄을 만듬
 			let tr = makeRow(item);
 			document.querySelector('table:nth-of-type(2) tbody').appendChild(tr);   //2번째 table의 tbody
 		});  // 댓글수만큼 tr 생성
