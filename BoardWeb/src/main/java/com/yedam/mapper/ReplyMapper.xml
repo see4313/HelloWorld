@@ -13,10 +13,14 @@
 
 <!-- 목록(boardList) -->
 	<select id = "replyList" parameterType="int" resultType ="Reply">
-	select *
-	from tbl_reply
-	where board_no = #{boardNo}
-	order by reply desc
+	select a.*  
+    from (select/*+INDEX_DESC (r pk_reply) */rownum rn, r.* 
+          from tbl_reply r
+          where board_no = #{bno}) a
+    where a.rn > (#{page} -1) * 5
+    <![CDATA[
+    and a.rn <= (#{page} * 5)
+    ]]>
 	</select>
 	
 	<!-- 등록(insertBoard) -->
@@ -35,7 +39,12 @@
 		reply_no = #{replyNo}
 	</delete>
 
-
-
+<!-- 전체 댓글 건수 -->
+	<select id = "selectTotal" parameterType="int" resultType="int">
+	  select count(1)
+	  from tbl_reply
+	  where board_no = #{bno}
+	</select>
+	
 
 </mapper>

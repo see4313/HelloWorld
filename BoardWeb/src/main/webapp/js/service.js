@@ -8,9 +8,9 @@ const svc = {
 	},
 
 	//목력을 출력해주는 메소드
-	replyList(bno, successCallback, errorCallback) {
+	replyList(param = { bno, page }, successCallback, errorCallback) {
 		// ajax호출
-		fetch('replyList.do?bno=' + bno)
+		fetch('replyList.do?bno=' + param.bno + '&page=' + param.page)
 			.then(data => data.json()) // data는 매개변수 이름 // 매개변수를 json pasing 하겠다의미
 			.then(successCallback)
 			.catch(errorCallback)
@@ -25,18 +25,30 @@ const svc = {
 			.catch(errorCallback)
 	},
 	// 댓글 등록 메소드
-	addReply(param = {bno, reply, replyer}, successCallback, errorCallback) {  // bno:bno, reply:reply 와 동일 의미인데 줄여서 사용
+	addReply(param = { bno, reply, replyer }, successCallback, errorCallback) {  // bno:bno, reply:reply 와 동일 의미인데 줄여서 사용
 		//ajax호출
 		fetch('addReply.do', { //등록은 get방식보다 post방식
 			method: 'post',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: 'bno=' + param.bno + '&reply='+ param.reply + ' &replyer=' + param.replyer
-		})   
+			body: 'bno=' + param.bno + '&reply=' + param.reply + ' &replyer=' + param.replyer
+		})
+			.then(data => data.json())
+			.then(successCallback)
+			.catch(errorCallback)
+
+	},
+
+	// 댓글 전체 건수
+	replyCount(bno, successCallback, errorCallback) {
+		// ajax 호출
+		fetch('replyCount.do?bno=' + bno)
 			.then(data => data.json())
 			.then(successCallback)
 			.catch(errorCallback)
 	}
-}
+
+} // end of replyCount
+
 // add라는 함수
 const add = (num1, num2) => {
 	return num1 + num2;

@@ -20,6 +20,8 @@ values(board_seq.nextval, 'JSP는 어때요?', '조금복잡하나 재미있어요', 'user03');
 insert into tbl_board(board_no, title, content, writer)
 values(board_seq.nextval, '에러가나요ㅜㅜ', '도와주세요...ㅠ', 'user04');
 
+
+
 select * from tbl_board
 order by board_no;
 
@@ -107,12 +109,36 @@ values (reply_seq.nextval, 213, '213번의 누구입니까?', 'user01');
 insert into tbl_reply (reply_no, board_no, reply, replyer)
 values (reply_seq.nextval, 213, '댓글작업하기', 'user01');
 
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 656, '댓글작업하기', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 656, '월요일 힘드네요', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+values (reply_seq.nextval, 656, '이번주도 빨리 지나가라~', 'user01');
+
+insert into tbl_reply (reply_no, board_no, reply, replyer)
+select reply_seq.nextval, board_no, reply, replyer
+from tbl_reply
+where board_no = 656;
+
+
 select *
 from tbl_reply
-where board_no = 221;
+where board_no = 656;
 
  select reply_seq.nextval 
  from dual;
+
+--index를 활용해서 정렬해줘서 order by 사용X
+select a.*  
+from (select/*+INDEX_DESC (r pk_reply) */rownum rn, r.* 
+      from tbl_reply r
+      where board_no = :bno) a
+where a.rn > (:page -1) * 5
+and a.rn <= (:page * 5);
 
 
 
