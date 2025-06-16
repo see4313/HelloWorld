@@ -21,7 +21,7 @@ Date.prototype.format = function() {
 // 댓글목록 출력
 showReplyList();
 function showReplyList() {
-	document.querySelector('#target').innerHTML = "";  // 목록지우기(화면 초기화)
+	document.querySelector('#target').innerHTML = "";  // 목록지우기(화면 초기화) // document.querySelector는 요소를 가지고 오는 것
 	svc.replyList({ bno, page }  //게시글번호
 		, result => {
 			let ul = document.querySelector('#target');
@@ -79,10 +79,11 @@ function addReplyHandler(e) {
 
 //댓글삭제함수
 async function deleteReply(e) {
-	let rno = e.target.parentElement.parentElement.dataset.rno;  	// 다른 방식 => let replyer = e.target.parentElement.parentElement.children[2].textContent;
-	let data = await fetch('replyInfo.do?rno=' + rno);
+	let rno = e.target.parentElement.parentElement.dataset.rno; 
+	// 다른 방식 => let replyer = e.target.parentElement.parentElement.children[2].textContent;
+	let data = await fetch('replyInfo.do?rno=' + rno);  
 	let result = await data.json();
-		if (result.replyer != logId) {
+		if (result.replyer != logId) {  // 댓글작성자와 아이디가 일치하지 않으면 권한 없음
 			alert('권한없음!');
 			return;
 		}

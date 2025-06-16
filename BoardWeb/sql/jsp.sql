@@ -111,23 +111,23 @@ values (reply_seq.nextval, 213, '댓글작업하기', 'user01');
 
 
 insert into tbl_reply (reply_no, board_no, reply, replyer)
-values (reply_seq.nextval, 656, '댓글작업하기', 'user01');
+values (reply_seq.nextval, 3, '댓글작업하기', 'user01');
 
 insert into tbl_reply (reply_no, board_no, reply, replyer)
-values (reply_seq.nextval, 656, '월요일 힘드네요', 'user01');
+values (reply_seq.nextval, 3, '월요일 힘드네요', 'user01');
 
 insert into tbl_reply (reply_no, board_no, reply, replyer)
-values (reply_seq.nextval, 656, '이번주도 빨리 지나가라~', 'user01');
+values (reply_seq.nextval, 3, '이번주도 빨리 지나가라~', 'user01');
 
 insert into tbl_reply (reply_no, board_no, reply, replyer)
 select reply_seq.nextval, board_no, reply, replyer
 from tbl_reply
-where board_no = 656;
+where board_no = 3;
 
 
 select *
 from tbl_reply
-where board_no = 656;
+where board_no = 3;
 
  select reply_seq.nextval 
  from dual;

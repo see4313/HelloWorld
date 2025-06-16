@@ -12,7 +12,7 @@ public class AppTest {
 		
 		
 		// 목록.
-		List<ReplyVO> list = svc.replyList(213);
+		List<ReplyVO> list = svc.replyList(213, 1);
 		for(ReplyVO reply : list) {  // reply변수에 list의 값을 순서대로 ReplyVO의 타입으로 반복 
 		System.out.println(reply.toString());
 		}
