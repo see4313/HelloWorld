@@ -140,5 +140,28 @@ from (select/*+INDEX_DESC (r pk_reply) */rownum rn, r.*
 where a.rn > (:page -1) * 5
 and a.rn <= (:page * 5);
 
+-- 작성자 
+select writer, member_name, count(1)
+from tbl_board b
+join tbl_member m
+on b.writer = m.member_id
+group by writer, member_name;
 
+--event테이블 생성
+create table tbl_events(title varchar2(30) not null,      
+                       d_start varchar2(300) not null,   
+                       d_end varchar2(100)); 
+                    
+drop table tbl_events;
+
+
+insert into tbl_events(title, d_start, d_end)
+values ('Birthday', '2025-06-16', null);
+
+insert into tbl_events(title, d_start, d_end)
+values ('meeting', '2025-06-02', '2025-06-04');
+
+select *
+from tbl_events
+order by title;
 
