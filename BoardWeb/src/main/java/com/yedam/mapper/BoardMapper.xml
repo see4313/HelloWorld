@@ -122,6 +122,7 @@
 	</select>
 
 
+<!-- events  -->
   <!-- 조회(selectEvent) -->
 	<select id="selectEvent" resultType="com.yedam.vo.EventVO">
 		select title, d_start as "start", d_end as "end" 

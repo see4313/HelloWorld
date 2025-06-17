@@ -151,8 +151,6 @@ group by writer, member_name;
 create table tbl_events(title varchar2(30) not null,      
                        d_start varchar2(300) not null,   
                        d_end varchar2(100)); 
-                    
-drop table tbl_events;
 
 
 insert into tbl_events(title, d_start, d_end)

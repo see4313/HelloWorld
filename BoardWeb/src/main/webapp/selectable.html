@@ -8,10 +8,11 @@
   
   document.addEventListener('DOMContentLoaded', async function() {
     var calendarEl = document.getElementById('calendar');
+    
 	// ajax 호출
 	let data = await fetch('eventList.do') // 조회하는기능 불러오기
-	let result = await data.json(); // 조회된 문자열을 파싱
-	let eventAry = result;  // 배열형태의 리스트
+	let result = await data.json(); // 조회된 문자열을 파싱해서 result변수에 담기
+	let eventAry = result;  // 배열형태의  리스트
 	console.log(eventAry);
 	
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,7 +36,8 @@
             end: arg.end,
             allDay: arg.allDay
           })
-          fetch('addEvent.do?title='+ title +'&start=' + arg.startStr + '&end=' + arg.endStr)
+          fetch('addEvent.do?title='+ title +'&start=' + arg.startStr + '&end=' + arg.endStr) // start, end는 arg안에 startStr안에 값이 담겨있다
+          //타이틀은 타이틀이고 html파일은 만들어진걸 들고온거라서 작성자가 start와 end의 값은 등록했을 떄 console에서 찾아서 어디에 들어가있는지 확인해봐야함   
           .then(data => data.json())
           .then(result => {
         	 if(result.retCode == 'Success'){
@@ -48,7 +50,6 @@
         calendar.unselect()
       },
       
-    
         
       // delete
       eventClick: function(arg) {

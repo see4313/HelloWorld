@@ -19,9 +19,10 @@ public class EventListControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/json;charset=utf-8");
+		resp.setContentType("text/json;charset=utf-8"); // 한글 번역
 		
-		BoardService svc = new BoardServiceImpl();
+		// 아작스에서 호출해서 사용 할수 있게 해줌.
+		BoardService svc = new BoardServiceImpl();  
 		List<EventVO> list = svc.eventList();
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

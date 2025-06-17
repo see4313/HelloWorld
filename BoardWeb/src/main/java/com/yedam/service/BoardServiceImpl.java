@@ -73,12 +73,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	
-	// event 
+	
 	@Override
 	public List<Map> chartCount() {
 		return mapper.selectUserByCount();
 	}
 
+	// event 
 	@Override
 	public List<EventVO> eventList() {
 		return mapper.selectEvent();
