@@ -110,5 +110,36 @@
 		</choose>
 	</select>
 
+	<!-- 조회 -->
+	<select id = "selectUserByCount" resultType="map">
+	  select writer as "writer", 
+	         member_name as "memberName",
+	         count(1) as "cnt"
+      from tbl_board b
+      join tbl_member m
+      on b.writer = m.member_id
+      group by writer, member_name
+	</select>
 
+
+  <!-- 조회(selectEvent) -->
+	<select id="selectEvent" resultType="com.yedam.vo.EventVO">
+		select title, d_start as "start", d_end as "end" 
+		from tbl_events
+		order by title
+	</select>
+  
+  <!-- 등록(insertEvent) -->
+  <insert id="insertEvent" parameterType="com.yedam.vo.EventVO">
+    insert into tbl_events(title, d_start, d_end)
+    values (#{title}, #{start}, #{end})
+  </insert>
+  
+  <!-- 삭제(deleteEvent) -->
+  <delete id="deleteEvent" parameterType="com.yedam.vo.EventVO">
+		delete tbl_events
+		where title = #{title}
+		and d_start = #{start}
+  </delete>
+	
 </mapper>

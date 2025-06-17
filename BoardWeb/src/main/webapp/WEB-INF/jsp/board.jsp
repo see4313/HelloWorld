@@ -7,16 +7,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- format타입으로 사용하라면 라이브러리 넣어줘야됨 -->
 
+<link
+	href="//cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css"
+	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="//cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
 
-<%
-BoardVO board = (BoardVO) request.getAttribute("board");
-
-String pg = (String) request.getAttribute("page");
-String sc = (String) request.getAttribute("searchCondition");
-String kw = (String) request.getAttribute("keyword");
-
-String logId = (String) session.getAttribute("logId");
-%>
 <h3>상세화면(board.jsp)</h3>
 <form action="modifyBoard.do">
 	<input type="hidden" name="bno" value="${board.boardNo}"> <input
@@ -70,41 +68,29 @@ String logId = (String) session.getAttribute("logId");
 	<div class="header">
 		<input class="col-sm-8 " id="reply">
 		<button class="col-sm-3 btn btn-primary" id="addReply">등록</button>
+		<button class="col-sm-3 btn btn-danger" id="delReply">삭제</button>
 	</div>
 
-	<div class="content">
-		<ul id="title">
-			<li><span class="col-sm-2">글번호</span>
-			    <span class="col-sm-4">글내용</span>
-				<span class="col-sm-2">작성자</span>
-			    <span class="col-sm-2">작성일시</span>
-				<span class="col-sm-1">삭제</span>
-			</li>
-		</ul>
+	<!-- datatable 활용 -->
+	<table id="example" class="display">
+		<thead>
+			<tr>
+				<th>댓글번호</th>
+				<th>내용</th>
+				<th>작성자</th>
+				<th>작성일시</th>
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>댓글번호</th>
+				<th>내용</th>
+				<th>작성자</th>
+				<th>작성일시</th>
+			</tr>
+		</tfoot>
+	</table>
 
-		<ul id="target"></ul>
-
-	</div>
-	
-	<div class="footer">
-		<!-- 푸터에는 댓글 페이징 넣기 -->
-		<nav aria-label="...">
-			<ul class="pagination pagination-sm">
-				<li class="page-item disabled">
-				<span class="page-link">Previous</span>
-				</li> <!-- 이전페이지 -->
-				
-				<li class="page-item"><a class="page-link" href="#">1</a></li>
-				<li class="page-item active" aria-current="page">
-				<span class="page-link">2</span></li>
-				<li class="page-item">
-				<a class="page-link" href="#">3</a></li>
-				<li class="page-item">
-				<a class="page-link" href="#">Next</a>
-				</li> <!-- 이후 페이지 -->
-			</ul>
-		</nav>
-	</div>
 </div>
 <!-- 댓글관련 페이지  -->
 <style>
@@ -125,5 +111,73 @@ div.reply span {
 				location.href = 'removeBoard.do?bno=' + bno; //href사용하면 get방식
 			})
 </script>
-<script src="js/service.js"></script>
-<script src="js/reply.js"></script>
+
+<script>
+const table = new DataTable('#example', {
+    ajax: 'replyList.do?bno='+bno,
+    columns: [
+        { data: 'replyNo' },
+        { data: 'reply' },
+        { data: 'replyer' },
+        { data: 'replyDate' }
+    ],
+    lengthMenu: [5, 10, 15, -1],
+     order: [[0, 'desc']]
+});
+
+// row 삭제
+table.on('click', 'tbody tr', (e) => { // on이 클릭 이벤트
+    let classList = e.currentTarget.classList;  // tr 부분에 e.current~ 클릭이벤트 실행하면 배열처럼 반환
+ 
+    if (classList.contains('selected')) {  // tr에 selected가 있는지 확인하고 
+        classList.remove('selected');      // selected가 있으면 지움
+    }
+    else {
+        table.rows('.selected').nodes().each((row) => row.classList.remove('selected'));  //제이쿼리방식으로 forEach가 .each로 표현됨
+        classList.add('selected');   
+    }
+});
+
+ // 삭제하기 전에 선택해서 지움
+document.querySelector('#delReply').addEventListener('click',async function () {
+	// 한건 삭제후 화면 갱신
+	if(!document.querySelector('tr.selected')){
+		alert('댓글을 선택하세요');
+		return;
+	}
+	//삭제할 댓글 번호
+	let rno = document.querySelector('tr.selected').children[0].innerHTML;
+	let data = await fetch('removeReply.do?rno=' + rno);
+	let result = await data.json();
+	if(result.retCode == 'Success') {
+		table.row('.selected').remove().draw(false);   //draw(false) 해줘야 화면 리프레쉬
+	}
+	
+});
+
+
+function addNewRow() {
+	// ajax 호출
+	let reply = document.querySelector('#reply').value;
+	if(!reply || !logId){
+		return;
+	}
+	fetch('addReply.do?bno='+ bno+ '&reply=' + reply +'&replyer=' + logId)
+	.then(data => data.json())
+	.then(result => {
+		console.log(result);
+		let rvo = result.retVal;
+	// 화면에 low를추가
+    table.row
+        .add({replyNo: rvo.replyNo,
+              reply: rvo.reply,
+              replyer: rvo.replyer,
+              replyDate: rvo.replyDate
+             })
+        .draw(false);
+	})
+	.catch(err => console.log(err));
+}
+ 
+document.querySelector('#addReply').addEventListener('click', addNewRow);
+</script>

@@ -1,40 +1,26 @@
 package com.yedam.common;
 
 import java.util.List;
+import java.util.Map;
 
-import com.yedam.service.ReplyService;
-import com.yedam.service.ReplyServiceImpl;
-import com.yedam.vo.ReplyVO;
+import org.apache.ibatis.session.SqlSession;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.yedam.mapper.BoardMapper;
 
 public class AppTest {
 	public static void main(String[] args) {
-		ReplyService svc = new ReplyServiceImpl();
 		
+		SqlSession sqlSession = DataSource.getInstance().openSession();
+		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		
-		// 목록.
-		List<ReplyVO> list = svc.replyList(213, 1);
-		for(ReplyVO reply : list) {  // reply변수에 list의 값을 순서대로 ReplyVO의 타입으로 반복 
-		System.out.println(reply.toString());
-		}
+		List<Map> list = mapper.selectUserByCount();
 		
-		//단건조회
-		ReplyVO rvo = svc.getReply(8);
-		System.out.println(rvo.toString());
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(list);
 		
-	
-		
-		//추가
-		ReplyVO reply = new ReplyVO();
-		reply.setBoardNo(8);
-		reply.setReply("복습중입니다");
-		reply.setReplyer("user01");
-		svc.addReply(reply);
-		
-		
-		//삭제
-		svc.removeReply(9);
-		
-		
+		System.out.println(json);
 		
 		
 		
