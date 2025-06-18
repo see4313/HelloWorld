@@ -20,9 +20,24 @@ values(board_seq.nextval, 'JSP는 어때요?', '조금복잡하나 재미있어요', 'user03');
 insert into tbl_board(board_no, title, content, writer)
 values(board_seq.nextval, '에러가나요ㅜㅜ', '도와주세요...ㅠ', 'user04');
 
+--멤버테이블에 회원가입기능과 사진
+alter table tbl_member add img varchar2(100);
+
+select *
+from tbl_member;
+
+delete tbl_member
+where member_id = 'user9999';
+
+update tbl_member
+set password = '1111'
+where member_id = 'user96';
 
 
-select * from tbl_board
+
+
+select * 
+from tbl_board
 order by board_no;
 
 select to_char(write_date, 'yyyy-mm-dd hh24:mi:ss') wdate

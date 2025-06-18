@@ -9,4 +9,5 @@ public class MemberVO {
 	private String memberName;
 	private String password;
 	private String reponsibility;
+	private String img;
 }

@@ -22,6 +22,25 @@ public class MemberServiceImpl implements MemberService {
 	public List<MemberVO> memberList(String order) {
 		return mapper.selectList(order);
 	}
+
+	@Override
+	public boolean addMember(MemberVO member) {
+		int r = mapper.insertMember(member);
+		if(r==1) {
+			sqlSesion.commit();
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean getMemberInfo(String id) {  //회원조회
+		MemberVO member = mapper.selectMemberInfo(id);
+		if(member != null) {
+			return true;
+		}
+		return false;
+	}
 	
 	
 

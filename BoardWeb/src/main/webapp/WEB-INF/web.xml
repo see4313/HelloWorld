@@ -2,6 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>BoardWeb</display-name>
   
+  <!-- 필터, url패턴 -->
+  <filter>
+    <filter-name>log</filter-name>
+    <filter-class>com.yedam.common.LogFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>log</filter-name>
+    <url-pattern>/*</url-pattern>  <!--  *은 현재경로를 기준으로 모든 경로에 다 사용 -->
+  </filter-mapping>
+  
   <listener>
     <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
   </listener>
@@ -23,7 +33,7 @@
   </servlet>
   <servlet-mapping>
   <servlet-name>front</servlet-name>
-  <url-pattern>*.do</url-pattern>  <!-- 무슨 값인지는 모르겠지만 끝에 .do로 끝나는걸 실행시킴 -->
+  <url-pattern>*.do</url-pattern>  <!-- 무슨 값인지는 모르겠지만 끝에 .do로 끝나는걸 실행시킴(여기에 설정안했으면 sevlet파일에 하나씩 등록해줘야됨 -->
   </servlet-mapping>
   
   <welcome-file-list>

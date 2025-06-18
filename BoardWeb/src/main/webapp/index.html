@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>홈페이지에 잘 왔습니다!</title>
+  <meta charset="UTF-8">
+  <title>홈페이지에 잘 왔습니다!</title>
+  <link href="css/styles.css" rel="stylesheet" />
+  <script type="module" src = "js/covid.js"></script> <!-- module타입을 줘야 module파일도 임포트가능 -->
 </head>
+
 <body>
 	<h3>Welcome My Home!!</h3>
-	<h3>손이영입니다</h3>
-	<a href="html/sample.html">Sample 페이지로 이동</a> <!-- 경로 지정해서 인덱스페이지에서 샘플페이지로 이동(하위페이지로이동은 /사용) -->
-	<a href="servlet/boardList.serv">게시판목록이동</a>
+	<h3>코로나19 센터정보</h3>
+	<!-- <input id="centerName" type="text" > -->
+	<select id="sido">
+	  <option>선택</option>
+	  
+	</select>
+	<button class="btn btn-primary">조회</button>
+	
+	
+	<table class="table">
+	  <thead>
+	    <tr>
+	      <th>센터ID</th><th>센터이름</th><th>전화번호</th>
+	    </tr>
+	  </thead>
+	  
+	  <tbody id="centerList"> <!-- 목록이 출력되는 부분 -->
+	  </tbody>
+	</table>
+	
+	<ul id="target"></ul>
+	
 </body>
 </html>
