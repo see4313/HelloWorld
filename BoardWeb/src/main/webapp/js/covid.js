@@ -25,7 +25,7 @@ fetch(url)    // fetch 비동기방식
 			if (idx < 10) {
 				// tr생성하기
 				let tr = makeRow(center);
-				document.querySelector('#centerList').appendChild(tr);
+				document.querySelector('#centerList').appendChild(tr);  // html에서 centerList를 불러옴
 			} // end of if
 		}); // end of for.
 		console.log(sidoAry);
@@ -89,5 +89,6 @@ let result = [1, 3, 5, 7].reduce(function(acc, elem, inx, ary) { //acc: 누산�
 		acc.appendChild(li);
 	}
 	return acc;  // 이번순번에서 리턴된값이 다음 순번의 누산값(acc)으로 사용 
-}, document.querySelector('#target')); // 0이 초기값 0 1 => 1(acc) 3 => 3(acc) 5 => 5(acc) 7 순으로 누산값이 사용된다 // 초기값이 뭐냐에 따라 값이 다양하게 나올수 있음
+	// }, 뒤가 초기값-> ex) 0 1 => 1(acc) 3 => 3(acc) 5 => 5(acc) 7 순으로 누산값이 사용된다 
+}, document.querySelector('#target')); // 초기값이 뭐냐에 따라 값이 다양하게 나올수 있음
 console.log('결과: ', result);
